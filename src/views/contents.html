@@ -1,20 +1,30 @@
 
-<div class="container" ng-controller="mainController">
+<div class="container container-custom" ng-controller="mainController">
+
+	<div class="row">
+		<div class="col-xs-4">
+			<form action="">
+				<div class="form-group">
+					<input class="form-control" placeholder="search for id" type="search"/>           <!-- st-search="id"-->
+				</div>
+			</form>
+		</div>
+	</div>
+
 
 	<div class="table-grid-wrap">
 
 		<div class="table-grid-viewport"  st-table="datasource" st-pipe="callServer" ui-scroll-viewport>
 
-			<!--<input st-search="id" placeholder="search for id" type="search"/>-->
+
 
 			<table class="table-grid viewport">
 				<thead>
 				<tr>
-					<th>
-
+					<th st-sort="id">
 						<div class="th-inn"  ng-hide="isReload" parent-width-propagating="columnWidthChangeEventObject">
 							<div class="th-fixed">
-								<div class="th-inn-inn"  st-sort="id">
+								<div class="th-inn-inn">
 									<div><div>id</div></div>
 								</div>
 							</div>
