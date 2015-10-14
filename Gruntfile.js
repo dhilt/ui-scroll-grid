@@ -121,6 +121,7 @@ module.exports = function (grunt) {
 				src: [
 					"vendors/angular/angular.js",
 					"vendors/angular-resource/angular-resource.js",
+					'vendors/angular-bootstrap/ui-bootstrap-tpls.js',
 					"vendors/angular-ui-scroll/dist/ui-scroll.js",
 					"vendors/angular-ui-scroll/dist/ui-scroll-jqlite.js",
 					"vendors/angular-smart-table/dist/smart-table.js",
