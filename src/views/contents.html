@@ -1,0 +1,36 @@
+
+<div class="container container-app" ng-controller="mainController">
+
+	<div class="wrapper">
+
+		<div st-table="datasource" st-pipe="callServer">
+
+			<input st-search="id" placeholder="search for id" type="search"/>
+
+			<table ui-scroll-viewport class="viewport">
+				<thead>
+				<tr>
+					<th st-sort="id">id</th>
+					<th>content</th>
+					<th st-sort="selected">active</th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
+					<td>{{row.id}}</td>
+					<td>{{row.content}}</td>
+					<td><input type="checkbox" ng-model="row.selected"></td>
+					<td>
+					<span ng-click="removeRow(row)" class="remove">
+						[delete]
+					</span>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+

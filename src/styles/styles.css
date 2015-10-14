@@ -1,0 +1,35 @@
+.wrapper {
+	margin-top: 50px;
+}
+
+.viewportSimple {
+	width: 240px;
+	height: 350px;
+	overflow-y: scroll;
+	margin-right: 100px;
+}
+
+.viewport {
+	width: 240px;
+	height: 350px;
+	overflow-y: scroll;
+}
+
+thead {
+	position: absolute;
+	margin-top: -50px;
+}
+
+.remove {
+	font-size: smaller;
+	cursor: pointer;
+}
+.remove:hover {
+	color: red;
+}
+.st-sort-ascent:before {
+	content: '\25B2';
+}
+.st-sort-descent:before {
+	content: '\25BC';
+}
