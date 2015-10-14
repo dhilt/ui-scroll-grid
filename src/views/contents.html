@@ -1,21 +1,79 @@
 
-<div class="container container-app" ng-controller="mainController">
+<div class="container" ng-controller="mainController">
 
-	<div class="wrapper">
+	<div class="table-grid-wrap">
 
-		<div st-table="datasource" st-pipe="callServer">
+		<div class="table-grid-viewport"  st-table="datasource" st-pipe="callServer" ui-scroll-viewport>
 
-			<input st-search="id" placeholder="search for id" type="search"/>
+			<!--<input st-search="id" placeholder="search for id" type="search"/>-->
 
-			<table ui-scroll-viewport class="viewport">
+			<table class="table-grid viewport">
 				<thead>
 				<tr>
-					<th st-sort="id">id</th>
-					<th>content</th>
-					<th st-sort="selected">active</th>
-					<th></th>
+					<th>
+
+						<div class="th-inn"  ng-hide="isReload" parent-width-propagating="columnWidthChangeEventObject">
+							<div class="th-fixed">
+								<div class="th-inn-inn"  st-sort="id">
+									<div><div>id</div></div>
+								</div>
+							</div>
+						</div>
+						<div class="hide-text">
+							<div>id</div>
+						</div>
+
+					</th>
+
+					<th>
+
+						<div class="th-inn" ng-hide="isReload" parent-width-propagating="columnWidthChangeEventObject">
+							<div class="th-fixed">
+								<div class="th-inn-inn">
+									<div><div>content</div></div>
+								</div>
+							</div>
+						</div>
+						<div class="hide-text">
+							<div>content</div>
+						</div>
+
+					</th>
+
+					<th st-sort="selected">
+
+						<div class="th-inn" ng-hide="isReload" parent-width-propagating="columnWidthChangeEventObject">
+							<div class="th-fixed">
+								<div class="th-inn-inn">
+									<div><div>active</div></div>
+								</div>
+							</div>
+						</div>
+						<div class="hide-text">
+							<div>active</div>
+						</div>
+
+
+						</th>
+
+					<th>
+
+						<div class="th-inn"  ng-hide="isReload" parent-width-propagating="columnWidthChangeEventObject">
+							<div class="th-fixed">
+								<div class="th-inn-inn">
+									<div><div>delete</div></div>
+								</div>
+							</div>
+						</div>
+						<div class="hide-text">
+							<div>delete</div>
+						</div>
+
+
+					</th>
 				</tr>
 				</thead>
+
 				<tbody>
 				<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
 					<td>{{row.id}}</td>
