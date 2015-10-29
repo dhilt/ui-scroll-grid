@@ -3,6 +3,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 
 	grunt.registerMultiTask('fileconstruct', 'Build a file', function () {
 		var cwd, dist = this.data.dist, files, path, ref, scripts, src = this.data.src;
@@ -81,6 +83,14 @@ module.exports = function (grunt) {
 			}
 		},
 
+		less: {
+			styles: {
+				files: {
+					'./.temp/styles/styles.css': ['./src/styles/styles.less']
+				}
+			}
+		},
+
 		copy: {
 			bower: {
 				files: [
@@ -95,9 +105,9 @@ module.exports = function (grunt) {
 			scriptSource: {
 				files: [
 					{
-						cwd: './src/scripts',
-						src: '**/*.js',
-						dest: '.temp/scripts',
+						cwd: './src/',
+						src: 'scripts/**/*.js',
+						dest: '.temp',
 						expand: true
 					}
 				]
@@ -106,8 +116,8 @@ module.exports = function (grunt) {
 				files: [
 					{
 						cwd: './src/',
-						src: 'styles/**/*',
-						dest: './.temp/',
+						src: 'styles/**/*.css',
+						dest: './.temp',
 						expand: true
 					}
 				]
@@ -147,7 +157,7 @@ module.exports = function (grunt) {
 		'bower:install',
 		'copy:bower',
 		'copy:scriptSource',
-		'copy:styleSource',
+		'less:styles',
 		'fileconstruct',
 		'wrap:dev'
 	]);
