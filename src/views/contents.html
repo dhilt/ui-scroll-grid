@@ -2,14 +2,13 @@
 
 	<div st-table="datasource" st-pipe="callServer">
 
-		<div class="row">
-			<div class="col-xs-4">
-				<div class="form-group" style="display: inline-block">
-					<input class="form-control" placeholder="search for id" type="search" st-search="id"/>
-				</div>
-				<button ng-click="reload()">Reload</button>
+
+		<form class="form-inline form-actions">
+			<div class="form-group" style="display: inline-block">
+				<input class="form-control" placeholder="search for id" type="search" st-search="id"/>
 			</div>
-		</div>
+			<button class="btn btn-link" ng-click="reload()"><span class="glyphicon glyphicon-refresh"></span></button>
+		</form>
 
 		<div class="table-grid-wrap">
 
@@ -63,10 +62,10 @@
 					<tbody>
 					<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
 						<td>
-							{{row.id}}
+							<!--<div style="width: 50px; background: rgba(255,0,0,.3);">-->{{row.id}}<!--</div>-->
 						</td>
 						<td>
-							{{row.content}}
+							<!--<div style="width: 80px; background: rgba(0,255,0,.3);">-->{{row.content}}<!--</div>-->
 						</td>
 						<td>
 							<input type="checkbox" ng-model="row.selected">
