@@ -18,3 +18,8 @@ To run:
 * run the app server `npm start`
 * to open the app in the browser go to `http://localhost:1234/`
 
+Local development:
+* remove directives depend on bower `grunt clean:bower`
+* compile app client side `grunt build`
+* run the app server `npm start`
+* to watch for source changes (js, html, less) `grunt watcher` -- run it in a separate terminal

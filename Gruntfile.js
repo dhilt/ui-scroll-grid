@@ -5,6 +5,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerMultiTask('fileconstruct', 'Build a file', function () {
 		var cwd, dist = this.data.dist, files, path, ref, scripts, src = this.data.src;
@@ -148,6 +149,37 @@ module.exports = function (grunt) {
 				footer: './src/views/footer.html',
 				dest: '.'
 			}
+		},
+
+		watch: {
+			scriptis: {
+				files: './src/scripts/**/*.js',
+				tasks: [
+					'copy:scriptSource'
+				],
+				options: {
+					livereload: false
+				}
+			},
+			styles: {
+				files: './src/styles/**/*.less',
+				tasks: [
+					'less:styles'
+				],
+				options: {
+					livereload: false
+				}
+			},
+			views: {
+				files: './src/views/**/*.html',
+				tasks: [
+					'fileconstruct',
+					'wrap:dev'
+				],
+				options: {
+					livereload: false
+				}
+			}
 		}
 
 	});
@@ -160,6 +192,10 @@ module.exports = function (grunt) {
 		'less:styles',
 		'fileconstruct',
 		'wrap:dev'
+	]);
+
+	grunt.registerTask('watcher', [
+		'watch'
 	]);
 
 };
