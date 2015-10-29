@@ -1,103 +1,91 @@
-
 <div class="container container-custom" ng-controller="mainController">
 
-	<div class="row">
-		<div class="col-xs-4">
-			<form action="">
-				<div class="form-group">
-					<input class="form-control" placeholder="search for id" type="search"/>           <!-- st-search="id"-->
-				</div>
-			</form>
+	<div st-table="datasource" st-pipe="callServer">
+
+		<div class="row">
+			<div class="col-xs-4">
+				<form action="">
+					<div class="form-group">
+						<input class="form-control" placeholder="search for id" type="search" st-search="id"/>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
 
+		<div class="table-grid-wrap">
 
-	<div class="table-grid-wrap">
+			<div class="table-grid-viewport" ui-scroll-viewport>
 
-		<div class="table-grid-viewport"  st-table="datasource" st-pipe="callServer" ui-scroll-viewport>
-
-
-
-			<table class="table-grid viewport">
-				<thead>
-				<tr>
-					<th st-sort="id">
-						<div class="th-inn"  ng-hide="isReload" parent-width-propagating="columnWidthChangeEventObject">
-							<div class="th-fixed">
-								<div class="th-inn-inn">
-									<div><div>id</div></div>
+				<table class="table-grid viewport">
+					<thead>
+					<tr>
+						<th st-sort="id">
+							<div class="th-inn" ng-hide="isReload"
+								 parent-width-propagating="columnWidthChangeEventObject">
+								<div class="th-fixed">
+									<div class="th-inn-inn"><div><div>id</div></div></div>
 								</div>
 							</div>
-						</div>
-						<div class="hide-text">
-							<div>id</div>
-						</div>
-
-					</th>
-
-					<th>
-
-						<div class="th-inn" ng-hide="isReload" parent-width-propagating="columnWidthChangeEventObject">
-							<div class="th-fixed">
-								<div class="th-inn-inn">
-									<div><div>content</div></div>
-								</div>
-							</div>
-						</div>
-						<div class="hide-text">
-							<div>content</div>
-						</div>
-
-					</th>
-
-					<th st-sort="selected">
-
-						<div class="th-inn" ng-hide="isReload" parent-width-propagating="columnWidthChangeEventObject">
-							<div class="th-fixed">
-								<div class="th-inn-inn">
-									<div><div>active</div></div>
-								</div>
-							</div>
-						</div>
-						<div class="hide-text">
-							<div>active</div>
-						</div>
-
-
+							<div class="hide-text"><div>id</div></div>
 						</th>
 
-					<th>
-
-						<div class="th-inn"  ng-hide="isReload" parent-width-propagating="columnWidthChangeEventObject">
-							<div class="th-fixed">
-								<div class="th-inn-inn">
-									<div><div>delete</div></div>
+						<th>
+							<div class="th-inn" ng-hide="isReload"
+								 parent-width-propagating="columnWidthChangeEventObject">
+								<div class="th-fixed">
+									<div class="th-inn-inn"><div><div>content</div></div></div>
 								</div>
 							</div>
-						</div>
-						<div class="hide-text">
-							<div>delete</div>
-						</div>
+							<div class="hide-text"><div>content</div></div>
+						</th>
 
+						<th st-sort="selected">
+							<div class="th-inn" ng-hide="isReload"
+								 parent-width-propagating="columnWidthChangeEventObject">
+								<div class="th-fixed">
+									<div class="th-inn-inn"><div><div>active</div></div></div>
+								</div>
+							</div>
+							<div class="hide-text"><div>active</div></div>
+						</th>
 
-					</th>
-				</tr>
-				</thead>
+						<th>
+							<div class="th-inn" ng-hide="isReload"
+								 parent-width-propagating="columnWidthChangeEventObject">
+								<div class="th-fixed">
+									<div class="th-inn-inn"><div><div>delete</div></div></div>
+								</div>
+							</div>
+							<div class="hide-text"><div>delete</div></div>
+						</th>
+					</tr>
+					</thead>
 
-				<tbody>
-				<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
-					<td>{{row.id}}</td>
-					<td>{{row.content}}</td>
-					<td><input type="checkbox" ng-model="row.selected"></td>
-					<td>
-					<span ng-click="removeRow(row)" class="remove">
-						[delete]
-					</span>
-					</td>
-				</tr>
-				</tbody>
-			</table>
+					<tbody>
+					<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
+						<td>
+							{{row.id}}
+						</td>
+						<td>
+							{{row.content}}
+						</td>
+						<td>
+							<input type="checkbox" ng-model="row.selected">
+						</td>
+						<td>
+							<span ng-click="removeRow(row)" class="remove">
+								[delete]
+							</span>
+						</td>
+					</tr>
+					</tbody>
+
+				</table>
+
+			</div>
+
 		</div>
+
 	</div>
 
 </div>
