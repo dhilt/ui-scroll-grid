@@ -5,6 +5,8 @@ angular.module('app').controller('mainController', [
 		var dataset = [];
 		var i, item;
 
+		$scope.gridFirstLoad = false;
+
 		for(i = 0; i < 1000; i++) {
 			item = {};
 			item.id = i;
@@ -47,6 +49,12 @@ angular.module('app').controller('mainController', [
 					}
 				}
 				result = tempResult;
+
+
+				if(!$scope.gridFirstLoad){
+					$scope.gridFirstLoad = true;
+					$timeout(function(){ $scope.columnWidthChangeEventObject = {}; }, 10);
+				}
 
 				console.log("data source get : index=" + (index - 1) + ", count=" + count);
 				success(result);
