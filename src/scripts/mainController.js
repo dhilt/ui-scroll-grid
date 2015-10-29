@@ -50,20 +50,26 @@ angular.module('app').controller('mainController', [
 				}
 				result = tempResult;
 
-
-				if(!$scope.gridFirstLoad){
-					$scope.gridFirstLoad = true;
-					$timeout(function(){ $scope.columnWidthChangeEventObject = {}; }, 10);
-				}
-
 				console.log("data source get : index=" + (index - 1) + ", count=" + count);
 				success(result);
+
+				$timeout(function(){ $scope.isReload = false; });
+				if(!$scope.gridFirstLoad){
+					$scope.gridFirstLoad = true;
+					$timeout(function(){ $scope.columnWidthChangeEventObject = {}; });
+				}
+
 			}, 100);
 		};
 
 		$scope.datasource = datasource;
 		$scope.datasourceAdapter = {};
 		$scope.adapter = {};
+
+		$scope.reload = function () {
+			$scope.isReload = true;
+			$scope.datasourceAdapter.reload();
+		};
 
 		$scope.removeRow = function(row) {
 			alert('Remove row#' + row.id + '.\nIt doesn\'t work.');
