@@ -29,8 +29,8 @@ body {
 
 /*table-grid*/
 .table-grid-wrap {
+	border-radius: 10px 10px 0 0;
 	position: relative;
-	padding-top: 37px;
 	overflow-x: auto;
 
 	&:before {
@@ -41,38 +41,38 @@ body {
 		top: 0;
 		left: 0;
 		background: @accent-color;
-		border-radius: 10px 10px 0 0;
+
 	}
 }
 
+@grid-width: 1140px;
 
-
+.table-grid-viewport-wrap {
+	padding-top: 37px;
+	position: relative;
+	width: @grid-width;
+	overflow: hidden;
+	float: left;
+}
 
 
 .table-grid-viewport {
 	overflow-y: auto;
 	overflow-x: hidden;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
 	height: 270px;
-	float: left;
-	//min-width: 881px;
-	//max-width: 927px;
+
 
 	/*table-grid*/
 	.table-grid {
-		//min-width: 881px;
-		min-width: 1140px;
-		//	max-width: 927px;
+		min-width: @grid-width;
 		table-layout: fixed;
 		max-width: none;
 		width: auto;
-		//width: 979px !important;
 		font-size: 13px;
 		background: #fff;
 
 		td,th {
 			border: 1px #e2e2e2 solid;
-			//padding: 5px;
 
 			&.td-centered {
 				text-align: center;
@@ -116,7 +116,7 @@ body {
 					.th-inn {
 						height: 37px;
 						position: absolute;
-						z-index: 10;
+						z-index: 1000;
 						top: 0;
 						//background: @accent-color;
 						//width: inherit;
@@ -159,7 +159,7 @@ body {
 						}
 
 						.th-inn-inn {
-							background: @accent-color;
+							//background: @accent-color;
 							height: inherit;
 
 							> div {
@@ -184,7 +184,7 @@ body {
 
 					}
 
-					&.sort {
+					&.sort_ {
 						padding-right: 15px;
 						background-repeat: no-repeat;
 						background-position: right 50%;
@@ -276,6 +276,73 @@ body {
 
 
 
+					}
+
+					&:nth-child(1) {
+						.sort-wrap .sort {
+							z-index: 100;
+						}
+					}
+
+					&:nth-child(2) {
+						.sort-wrap .sort {
+							z-index: 99;
+						}
+					}
+
+					&:nth-child(3) {
+						.sort-wrap .sort {
+							z-index: 98;
+						}
+					}
+
+					&:nth-child(4) {
+						.sort-wrap .sort {
+							z-index: 97;
+						}
+					}
+
+					&:nth-child(5) {
+						.sort-wrap .sort {
+							z-index: 96;
+						}
+					}
+
+					&:nth-child(6) {
+						.sort-wrap .sort {
+							z-index: 95;
+						}
+					}
+
+					&:nth-child(7) {
+						.sort-wrap .sort {
+							z-index: 94;
+						}
+					}
+
+					&:nth-child(8) {
+						.sort-wrap .sort {
+							z-index: 93;
+						}
+					}
+
+
+
+					.sort-wrap {
+						float: right;
+
+						.sort {
+							position: absolute;
+							-webkit-transform: translateX(-100%);
+							-ms-transform: translateX(-100%);
+							transform: translateX(-100%);
+							cursor: pointer;
+							margin-left: 5px;
+							top: 0;
+							height: 37px;
+							width: 5000px;
+							background: @accent-color;
+						}
 					}
 
 
