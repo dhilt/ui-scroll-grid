@@ -1,5 +1,5 @@
 angular.module('app').controller('mainController', [
-	'$scope', '$log', '$timeout', function ($scope, console, $timeout) {
+	'$scope', '$log', '$timeout', 'resourceFactory', function ($scope, console, $timeout, resource) {
 		var datasource = {};
 		var blank = true;
 		var dataset = [];
@@ -16,7 +16,19 @@ angular.module('app').controller('mainController', [
 		}
 
 		datasource.get = function (index, count, success) {
-			$timeout(function () {
+
+			var processResult = function(result) {
+				success(result);
+			};
+
+			var options = {
+				index: index,
+				count: count,
+				state: $scope.tableState
+			};
+			resource.list(options, processResult);
+
+			/*$timeout(function () {
 				var result = dataset, tempResult, i, len;
 
 				// filtering by id
@@ -62,7 +74,7 @@ angular.module('app').controller('mainController', [
 					});
 				}
 
-			}, 100);
+			}, 100);*/
 		};
 
 		$scope.datasource = datasource;
