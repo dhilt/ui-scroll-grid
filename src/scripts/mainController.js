@@ -53,8 +53,10 @@ angular.module('app').controller('mainController', [
 				console.log("data source get : index=" + (index - 1) + ", count=" + count);
 				success(result);
 
-				if (!$scope.gridFirstLoad) {
+
+				if (!$scope.gridFirstLoad || $scope.gridReload) {
 					$scope.gridFirstLoad = true;
+					$scope.gridReload = false;
 					$timeout(function () {
 						$scope.columnWidthChangeEventObject = {};
 					});
@@ -68,6 +70,7 @@ angular.module('app').controller('mainController', [
 		$scope.adapter = {};
 
 		$scope.reload = function () {
+			$scope.gridReload = true;
 			$scope.datasourceAdapter.reload();
 		};
 
