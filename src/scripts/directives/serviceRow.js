@@ -29,10 +29,18 @@ angular.module('app').directive('serviceRow', [
 			var createServiceRow = function (columnsWidth) {
 				var serviceRowContents = '';
 				for (var i = 0; i < columnsWidth.length; i++) {
-					serviceRowContents += '<td style="width:' + columnsWidth[i] + 'px; height: 0; padding: 0; border-width: 0;"></td>';
+					serviceRowContents += '<td style="width:' + columnsWidth[i] + 'px;"></td>';
 				}
-				var table = angular.element('<table><tr>' + serviceRowContents + '</tr></table>');
+				var table = angular.element('<table><tr class="serviceRow">' + serviceRowContents + '</tr></table>');
 				return table.find('tr');
+			};
+
+			var injectServiceRow = function(serviceRow) {
+				var tmp;
+				if (!(tmp = element.children()).length) return false;
+				if (!(tmp = tmp[0])) return false; // need to inject after 1st empty (ui-scroll padding) row
+				if (!(tmp = angular.element(tmp))) return false;
+				tmp.after(serviceRow);
 			};
 
 			scope.$watch(attrs.serviceRow, function () {
@@ -40,17 +48,16 @@ angular.module('app').directive('serviceRow', [
 					return;
 				}
 
-				var columnsWidth = getColumnsWidth();
-				if (!columnsWidth) {
-					return false;
+				var columnsWidth, serviceRow;
+
+				if (!(columnsWidth = getColumnsWidth())) {
+					return;
+				}
+				if (!(serviceRow = createServiceRow(columnsWidth))) {
+					return;
 				}
 
-				var serviceRow = createServiceRow(columnsWidth);
-				if (!serviceRow) {
-					return false;
-				}
-
-				element.prepend(serviceRow);
+				injectServiceRow(serviceRow);
 			});
 
 		};

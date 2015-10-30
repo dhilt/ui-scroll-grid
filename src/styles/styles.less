@@ -369,6 +369,14 @@ body {
 		/*tbody*/
 		tbody {
 
+			tr.serviceRow, tr:first-child, tr:last-child {
+				td {
+					height: 0;
+					padding: 0;
+					border-width: 0;
+				}
+			}
+
 			tr {
 				cursor: pointer;
 
@@ -765,19 +773,8 @@ body {
 		}
 		/*!tbody*/
 
-
-
 	}
 	/*table-grid*/
-
-
-
-
-
-
-
-
-
 
 }
 
@@ -790,8 +787,6 @@ body {
 	}
 
 }
-
-
 
 /*auto-height-table-grid*/
 .auto-height-table-grid (@index,@delta) when (@index < 1500px) {
@@ -807,3 +802,5 @@ body {
 }
 .auto-height-table-grid (430px, 160px);
 /*auto-height-table-grid*/
+
+
