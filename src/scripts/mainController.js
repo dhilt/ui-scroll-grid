@@ -7,20 +7,20 @@ angular.module('app').controller('mainController', [
 
 		$scope.gridFirstLoad = false;
 
-		for(i = 0; i < 1000; i++) {
+		for (i = 0; i < 1000; i++) {
 			item = {};
 			item.id = i;
 			item.content = "item #" + i;
-			item.selected = Math.random()<.5;
+			item.selected = Math.random() < .5;
 			dataset.push(item);
 		}
 
-		datasource.get = function(index, count, success) {
-			$timeout(function() {
+		datasource.get = function (index, count, success) {
+			$timeout(function () {
 				var result = dataset, tempResult, i, len;
 
 				// filtering by id
-				if($scope.tableState.search.predicateObject && $scope.tableState.search.predicateObject.id) {
+				if ($scope.tableState.search.predicateObject && $scope.tableState.search.predicateObject.id) {
 					result = [];
 					for (i = 0, len = dataset.length; i < len; i = ++i) {
 						if ((dataset[i].id + '').indexOf($scope.tableState.search.predicateObject.id + '') !== -1) {
@@ -30,12 +30,12 @@ angular.module('app').controller('mainController', [
 				}
 
 				// sorting
-				if($scope.tableState.sort && $scope.tableState.sort.predicate) {
-					result = result.sort(function(a, b) {
-						if($scope.tableState.sort.predicate === 'id') {
+				if ($scope.tableState.sort && $scope.tableState.sort.predicate) {
+					result = result.sort(function (a, b) {
+						if ($scope.tableState.sort.predicate === 'id') {
 							return $scope.tableState.sort.reverse ? a.id - b.id : b.id - a.id;
 						}
-						if($scope.tableState.sort.predicate === 'selected') {
+						if ($scope.tableState.sort.predicate === 'selected') {
 							return $scope.tableState.sort.reverse ? a.selected - b.selected : b.selected - a.selected;
 						}
 					});
@@ -53,10 +53,11 @@ angular.module('app').controller('mainController', [
 				console.log("data source get : index=" + (index - 1) + ", count=" + count);
 				success(result);
 
-				$timeout(function(){ $scope.isReload = false; });
-				if(!$scope.gridFirstLoad){
+				if (!$scope.gridFirstLoad) {
 					$scope.gridFirstLoad = true;
-					$timeout(function(){ $scope.columnWidthChangeEventObject = {}; });
+					$timeout(function () {
+						$scope.columnWidthChangeEventObject = {};
+					});
 				}
 
 			}, 100);
@@ -67,17 +68,16 @@ angular.module('app').controller('mainController', [
 		$scope.adapter = {};
 
 		$scope.reload = function () {
-			$scope.isReload = true;
 			$scope.datasourceAdapter.reload();
 		};
 
-		$scope.removeRow = function(row) {
+		$scope.removeRow = function (row) {
 			alert('Remove row#' + row.id + '.\nIt doesn\'t work.');
 		};
 
-		$scope.callServer = function(tableState) {
+		$scope.callServer = function (tableState) {
 			$scope.tableState = tableState;
-			if(!blank && $scope.datasourceAdapter.reload)
+			if (!blank && $scope.datasourceAdapter.reload)
 				$scope.datasourceAdapter.reload();
 			blank = false;
 		};

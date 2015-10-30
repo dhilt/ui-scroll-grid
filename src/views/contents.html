@@ -18,8 +18,7 @@
 					<thead>
 					<tr>
 						<th st-sort="id">
-							<div class="th-inn" ng-hide="isReload"
-								 parent-width-propagating="columnWidthChangeEventObject">
+							<div class="th-inn">
 								<div class="th-fixed">
 									<div class="th-inn-inn"><div><div>id</div></div></div>
 								</div>
@@ -28,8 +27,7 @@
 						</th>
 
 						<th>
-							<div class="th-inn" ng-hide="isReload"
-								 parent-width-propagating="columnWidthChangeEventObject">
+							<div class="th-inn">
 								<div class="th-fixed">
 									<div class="th-inn-inn"><div><div>content</div></div></div>
 								</div>
@@ -38,8 +36,7 @@
 						</th>
 
 						<th st-sort="selected">
-							<div class="th-inn" ng-hide="isReload"
-								 parent-width-propagating="columnWidthChangeEventObject">
+							<div class="th-inn">
 								<div class="th-fixed">
 									<div class="th-inn-inn"><div><div>active</div></div></div>
 								</div>
@@ -48,8 +45,7 @@
 						</th>
 
 						<th>
-							<div class="th-inn" ng-hide="isReload"
-								 parent-width-propagating="columnWidthChangeEventObject">
+							<div class="th-inn">
 								<div class="th-fixed">
 									<div class="th-inn-inn"><div><div>delete</div></div></div>
 								</div>
@@ -59,7 +55,7 @@
 					</tr>
 					</thead>
 
-					<tbody>
+					<tbody service-row="columnWidthChangeEventObject">
 					<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
 						<td>
 							<!--<div style="width: 50px; background: rgba(255,0,0,.3);">-->{{row.id}}<!--</div>-->
