@@ -5,7 +5,7 @@ app.listen(1234);
 
 var dataset = [];
 
-for (var i = 0; i < 60; i++) {
+for (var i = 0; i < 600; i++) {
 	var item = {};
 	item.id = i;
 	item.content = "item #" + i;
@@ -16,7 +16,8 @@ for (var i = 0; i < 60; i++) {
 app.get('/api', function(req, res){
 
 	var result = dataset, tempResult, i, len;
-	var state = req.query.state || {};
+	var state = req.query.state || "{}";
+	state = JSON.parse(state);
 	var index = parseInt(req.query.index, 10);
 	var count = parseInt(req.query.count, 10);
 
@@ -34,10 +35,13 @@ app.get('/api', function(req, res){
 	if (state.sort && state.sort.predicate) {
 		result = result.sort(function (a, b) {
 			if (state.sort.predicate === 'id') {
-				return state.sort.reverse ? a.id - b.id : b.id - a.id;
+				return !state.sort.reverse ? a.id - b.id : b.id - a.id;
+			}
+			if (state.sort.predicate === 'content') {
+				return !state.sort.reverse ? (a.content == b.content ? 0 : +(a.content > b.content) || -1): (b.content == a.content ? 0 : +(b.content > a.content) || -1);
 			}
 			if (state.sort.predicate === 'selected') {
-				return state.sort.reverse ? a.selected - b.selected : b.selected - a.selected;
+				return !state.sort.reverse ? a.selected - b.selected : b.selected - a.selected;
 			}
 		});
 	}
