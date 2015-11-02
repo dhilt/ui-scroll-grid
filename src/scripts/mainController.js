@@ -7,7 +7,7 @@ angular.module('app').controller('mainController', [
 
 		datasource.get = function (index, count, success) {
 
-			var processResult = function(result) {
+			var processResult = function (result) {
 				success(result);
 
 				if (!$scope.gridFirstLoad || $scope.gridReload) {
@@ -38,7 +38,21 @@ angular.module('app').controller('mainController', [
 		};
 
 		$scope.removeRow = function (row) {
-			alert('Remove row#' + row.id + '.\nIt doesn\'t work.');
+			resource.remove({ id: row.id }, function (result) {
+				if (result.id === null) {
+					alert('Row#' + row.id + ' was not removed. ' + result.reason)
+				}
+				else {
+					$scope.datasourceAdapter.applyUpdates(function (item, scope) {
+							if (item.id == result.id)
+								return [];
+						}
+					);
+					$timeout(function () {
+						alert('Row#' + result.id + ' was removed.');
+					});
+				}
+			});
 		};
 
 		$scope.callServer = function (tableState) {
