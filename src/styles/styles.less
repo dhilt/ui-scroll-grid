@@ -326,11 +326,23 @@ body {
 		/*tbody*/
 		tbody {
 
-			tr.serviceRow, tr:first-child, tr:last-child {
+			tr:first-child, tr:last-child {
 				td {
 					height: 0;
 					padding: 0;
 					border-width: 0;
+				}
+			}
+
+			tr.serviceRow {
+				td {
+					padding: 0 !important;
+					height: 0;
+					border-width: 0;
+
+					div {
+						height: 0;
+					}
 				}
 			}
 
@@ -342,10 +354,6 @@ body {
 					padding-bottom: 3px;
 					padding-left: 5px;
 					padding-right: 5px;
-
-					&:last-child {
-						padding-right: 29px !important;
-					}
 
 					&[colspan="200"] {
 						padding: 0;
@@ -364,8 +372,6 @@ body {
 						outline: 1px #e2e2e2 solid;
 					}
 
-
-
 					.col-inn-wrap {
 						display: table;
 						width: 100%;
@@ -378,9 +384,7 @@ body {
 							&:first-child {
 								width: 1%;
 								border-left: 0;
-
 							}
-
 
 						}
 					}
@@ -617,6 +621,12 @@ body {
 					}
 				}
 
+				&:not(.serviceRow) {
+					td:last-child {
+						padding-right: 29px !important;
+					}
+				}
+
 
 				/*states*/
 				&:hover {
@@ -771,7 +781,7 @@ body {
 /*auto-table-grid-th-z-index*/
 
 .w {
-	width: 500px;
+	//width: 500px;
 }
 
 

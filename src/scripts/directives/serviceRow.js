@@ -39,7 +39,9 @@ angular.module('app').directive('serviceRow', [
 			var createServiceRow = function (columnsWidth) {
 				var serviceRowContents = '';
 				for (var i = 0; i < columnsWidth.length; i++) {
-					serviceRowContents += '<td style="width:' + columnsWidth[i] + 'px;"></td>';
+                    var w =  parseInt(columnsWidth[i]);
+                    w = w + 1;
+					serviceRowContents += '<td><div style="width:' + w + 'px;"></div></td>';
 				}
 				var table = angular.element('<table><tr class="serviceRow">' + serviceRowContents + '</tr></table>');
 
