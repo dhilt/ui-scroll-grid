@@ -11,11 +11,12 @@
 
 
 body {
-	min-width: 1170px;
+	min-width: 1170px !important;
 }
 
 .container {
 	width: 1170px !important;
+	max-width: none !important;
 
 	&.container-custom {
 		padding-top: 25px;
@@ -29,9 +30,10 @@ body {
 
 /*table-grid*/
 .table-grid-wrap {
+	border-radius: 10px 10px 0 0;
 	position: relative;
-	padding-top: 37px;
 	overflow-x: auto;
+
 
 	&:before {
 		content: "";
@@ -41,38 +43,40 @@ body {
 		top: 0;
 		left: 0;
 		background: @accent-color;
-		border-radius: 10px 10px 0 0;
+
 	}
 }
 
+@grid-width: 1140px;
 
-
+.table-grid-viewport-wrap {
+	padding-top: 37px;
+	position: relative;
+	overflow: hidden;
+	float: left;
+}
 
 
 .table-grid-viewport {
 	overflow-y: auto;
 	overflow-x: hidden;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
 	height: 270px;
-	float: left;
-	//min-width: 881px;
-	//max-width: 927px;
+
+
 
 	/*table-grid*/
 	.table-grid {
-		//min-width: 881px;
-		min-width: 1140px;
-		//	max-width: 927px;
+		overflow: hidden;
+		//min-width: @grid-width;
 		table-layout: fixed;
 		max-width: none;
-		width: auto;
-		//width: 979px !important;
+	//	min-width: 100%;
+		min-width: @grid-width;
 		font-size: 13px;
 		background: #fff;
 
 		td,th {
 			border: 1px #e2e2e2 solid;
-			//padding: 5px;
 
 			&.td-centered {
 				text-align: center;
@@ -109,26 +113,14 @@ body {
 						}
 					}
 
-
-
-
-
 					.th-inn {
 						height: 37px;
 						position: absolute;
-						z-index: 10;
+						z-index: 1000;
 						top: 0;
-						//background: @accent-color;
-						//width: inherit;
-
 						color: #fff;
 						margin-left: -5px;
 						line-height: 1em;
-						//visibility: hidden;
-
-
-
-
 
 						&:before {
 							content: "";
@@ -137,9 +129,7 @@ body {
 							height: 100%;
 							left: -1px;
 							top: 0;
-
 							background: #00a65e;
-							//background: red;
 						}
 
 
@@ -150,8 +140,6 @@ body {
 							height: 100%;
 							right: -1px;
 							top: 0;
-							//background: #00a65e;
-
 						}
 
 						.th-fixed {
@@ -159,7 +147,6 @@ body {
 						}
 
 						.th-inn-inn {
-							background: @accent-color;
 							height: inherit;
 
 							> div {
@@ -177,32 +164,33 @@ body {
 								}
 							}
 						}
-
-
-
-
-
 					}
 
+					.sort-wrap {
+						float: right;
+
+						.sort {
+							position: absolute;
+							-webkit-transform: translateX(-100%);
+							-ms-transform: translateX(-100%);
+							transform: translateX(-100%);
+							margin-left: 5px;
+							top: 0;
+							height: 37px;
+							width: @grid-width;
+							background-color: @accent-color;
+						}
+					}
+
+					/*sort*/
 					&.sort {
-						padding-right: 15px;
-						background-repeat: no-repeat;
-						background-position: right 50%;
-						background-image: url("../../img/sort-default.png");
 
-
-						&:hover {
-							background-color: lighten(@accent-color, 3%);
-						}
-
-						&:active {
-							background-color: darken(@accent-color, 3%);
-						}
-
-						.th-inn {
-
-
-							.th-inn-inn {
+						.sort-wrap {
+							.sort {
+								background-repeat: no-repeat;
+								background-position: right 50%;
+								background-image: url("../../img/sort-default.png");
+								cursor: pointer;
 
 								&:hover {
 									background-color: lighten(@accent-color, 3%);
@@ -211,65 +199,48 @@ body {
 								&:active {
 									background-color: darken(@accent-color, 3%);
 								}
+							}
+						}
 
-
+						.th-inn {
+							.th-inn-inn {
 								> div {
 									> div {
 										padding-right: 15px;
-										background-repeat: no-repeat;
-										background-position: right 50%;
-										background-image: url("../../img/sort-default.png");
 										cursor: pointer;
 									}
 								}
 							}
-
-
-
-
 						}
 
 
-						&.sort-up,
-						&.sort-down {
-							background-color: darken(@accent-color, 3%);
-
-							.th-inn {
-
-								.th-inn-inn {
+						&.st-sort-ascent,
+						&.st-sort-descent {
+							.sort-wrap {
+								.sort {
 									background-color: darken(@accent-color, 3%);
 								}
-
-
 							}
 						}
 
+						&.st-sort-ascent,
 						&.sort-up {
-							background-image: url("../../img/sort-up.png");
 
-							.th-inn {
-								.th-inn-inn {
-									> div {
-										> div {
-											background-image: url("../../img/sort-up.png");
-										}
-									}
+							.sort-wrap {
+								.sort {
+									background-image: url("../../img/sort-down.png");
 								}
-
-
 							}
+
 						}
 
+						&.st-sort-descent,
 						&.sort-down {
-							background-image: url("../../img/sort-down.png");
 
-							.th-inn {
-								.th-inn-inn {
-									> div {
-										> div {
-											background-image: url("../../img/sort-down.png");
-										}
-									}
+
+							.sort-wrap {
+								.sort {
+									background-image: url("../../img/sort-up.png");
 								}
 							}
 						}
@@ -277,6 +248,9 @@ body {
 
 
 					}
+					/*!sort*/
+
+
 
 
 					&:first-child {
@@ -284,29 +258,12 @@ body {
 							&:before {
 								display: none;
 							}
-
-							.th-inn-inn {
-								border-radius: 10px 0 0 0;
-							}
-							/*&:before {
-								top: auto;
-								bottom: 0;
-								width: 3px;
-								height: 3px;
-								left: -1px;
-								background: @accent-color;
-							}*/
 						}
 					}
 
 
 					&:last-child {
 						.th-inn {
-
-							.th-inn-inn {
-								border-radius: 0 10px 0 0;
-							}
-
 							&:after {
 								display: none;
 							}
@@ -802,5 +759,21 @@ body {
 }
 .auto-height-table-grid (430px, 160px);
 /*auto-height-table-grid*/
+
+/*auto-table-grid-th-z-index*/
+.auto-table-grid-th-z-index (@i,@z) when (@i < 100) {
+	.table-grid-viewport .table-grid thead tr th:nth-child(@{i}) .sort-wrap .sort {
+		z-index: ~"@{z}";
+	}
+	.auto-table-grid-th-z-index(@i + 1,@z - 1);
+}
+.auto-table-grid-th-z-index(1,500);
+/*auto-table-grid-th-z-index*/
+
+.w {
+	//width: 500px;
+}
+
+
 
 

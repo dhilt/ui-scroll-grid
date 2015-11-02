@@ -12,69 +12,110 @@
 
 		<div class="table-grid-wrap">
 
+			<div class="table-grid-viewport-wrap">
+
 			<div class="table-grid-viewport" ui-scroll-viewport>
 
 				<table class="table-grid viewport">
 					<thead>
 					<tr>
-						<th st-sort="id">
-							<div class="th-inn" parent-width-propagating="columnWidthChangeEventObject">
+						<th class="sort" st-sort="id">
+							<div class="th-inn">
 								<div class="th-fixed">
 									<div class="th-inn-inn"><div><div>id</div></div></div>
 								</div>
 							</div>
 							<div class="hide-text"><div>id</div></div>
+							<div class="sort-wrap">
+								<div class="sort"></div>
+							</div>
 						</th>
 
-						<th st-sort="content">
-							<div class="th-inn" parent-width-propagating="columnWidthChangeEventObject">
+						<th class="sort" st-sort="content">
+							<div class="th-inn">
 								<div class="th-fixed">
 									<div class="th-inn-inn"><div><div>content</div></div></div>
 								</div>
 							</div>
 							<div class="hide-text"><div>content</div></div>
+							<div class="sort-wrap">
+								<div class="sort"></div>
+							</div>
 						</th>
 
-						<th st-sort="selected">
-							<div class="th-inn" parent-width-propagating="columnWidthChangeEventObject">
+						<th class="sort" st-sort="selected">
+							<div class="th-inn">
 								<div class="th-fixed">
 									<div class="th-inn-inn"><div><div>active</div></div></div>
 								</div>
 							</div>
 							<div class="hide-text"><div>active</div></div>
+							<div class="sort-wrap">
+								<div class="sort"></div>
+							</div>
 						</th>
 
 						<th>
-							<div class="th-inn" parent-width-propagating="columnWidthChangeEventObject">
+							<div class="th-inn">
 								<div class="th-fixed">
 									<div class="th-inn-inn"><div><div>delete</div></div></div>
 								</div>
 							</div>
 							<div class="hide-text"><div>delete</div></div>
+							<div class="sort-wrap">
+								<div class="sort"></div>
+							</div>
 						</th>
+
+
+
+
+
+
+
+
+
+
+
+
+
 					</tr>
 					</thead>
 
 					<tbody service-row="columnWidthChangeEventObject">
 					<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
 						<td>
+							<div class="w">
 							{{row.id}}
+							</div>
 						</td>
 						<td>
+							<div class="w">
 							{{row.content}}
+							</div>
 						</td>
 						<td>
+							<div class="w">
 							<input type="checkbox" ng-model="row.selected">
+							</div>
 						</td>
 						<td>
+							<div class="w">
 							<span ng-click="removeRow(row)" class="remove">
 								[delete]
 							</span>
+							</div>
 						</td>
+
+
+
+
 					</tr>
 					</tbody>
 
 				</table>
+
+			</div>
 
 			</div>
 

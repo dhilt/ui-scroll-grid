@@ -113,6 +113,16 @@ module.exports = function (grunt) {
 					}
 				]
 			},
+			imgSource: {
+				files: [
+					{
+						cwd: './src/',
+						src: 'img/**/*.png',
+						dest: '.temp',
+						expand: true
+					}
+				]
+			},
 			styleSource: {
 				files: [
 					{
@@ -189,6 +199,7 @@ module.exports = function (grunt) {
 		'bower:install',
 		'copy:bower',
 		'copy:scriptSource',
+		'copy:imgSource',
 		'less:styles',
 		'fileconstruct',
 		'wrap:dev'
