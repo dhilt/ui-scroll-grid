@@ -43,14 +43,14 @@ angular.module('app').directive('serviceRow', [
 				serviceRowColumns = table.find('td');
 				injectServiceRow(serviceRow);
 				for (i = 0; i < serviceRowColumns.length; i++) {
-					serviceRowColumns[i].firstChild.style.width = (serviceRowColumns[i].clientWidth - 1) + 'px';
+					serviceRowColumns[i].firstChild.style.width = (serviceRowColumns[i].clientWidth) + 'px';
 				}
 			};
 
 			var updateServiceRow = function () {
 				for (var i = 0; i < columnsNumber; i++) {
 					var elt = angular.element(serviceRowColumns[i]);
-					elt.find('div').css('width', (serviceRowColumns[i].clientWidth - 1) + 'px');
+					elt.find('div').css('width', (serviceRowColumns[i].clientWidth) + 'px');
 				}
 			};
 
