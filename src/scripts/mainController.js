@@ -67,7 +67,10 @@ angular.module('app').controller('mainController', [
 			}
 		};
 
-		$scope.$watch('showId', function () {
+		$scope.$watch('showId', function (v1, v2) {
+			if(v1 === v2) {
+				return;
+			}
 			$timeout(function () {
 				$scope.columnWidthChangeEventObject = {};
 			});
