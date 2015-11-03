@@ -39,9 +39,7 @@ angular.module('app').directive('serviceRow', [
 			var createServiceRow = function (columnsWidth) {
 				var serviceRowContents = '';
 				for (var i = 0; i < columnsWidth.length; i++) {
-                    var w =  parseInt(columnsWidth[i]);
-                    w = w + 1;
-					serviceRowContents += '<td><div style="width:' + w + 'px;"></div></td>';
+					serviceRowContents += '<td><div style="width:' + (columnsWidth[i] + 1) + 'px;"></div></td>';
 				}
 				var table = angular.element('<table><tr class="serviceRow">' + serviceRowContents + '</tr></table>');
 
@@ -53,7 +51,7 @@ angular.module('app').directive('serviceRow', [
 				// todo dhilt : thin about dealing with changes of columns number
 				for (var i = 0; i < columnsWidth.length; i++) {
 					var elt = angular.element(serviceRowColumns[i]);
-					elt.css('width', columnsWidth[i].clientWidth + 'px');
+					elt.css('width', (columnsWidth[i] + 1) + 'px');
 				}
 			};
 

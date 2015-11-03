@@ -17,15 +17,13 @@ angular.module('app').controller('mainController', [
 						$scope.columnWidthChangeEventObject = {};
 					});
 				}
-
 			};
 
-			var options = {
+			resource.list({
 				index: index,
 				count: count,
 				state: $scope.tableState
-			};
-			resource.list(options, processResult);
+			}, processResult);
 		};
 
 		$scope.datasource = datasource;
