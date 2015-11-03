@@ -2,6 +2,7 @@ angular.module('app').directive('serviceRow', [
 	'$timeout', function ($timeout) {
 		return function (scope, element, attrs) {
 
+			var tHeadRow = null;
 			var serviceRow = null;
 			var serviceRowColumns = null;
 
@@ -16,7 +17,7 @@ angular.module('app').directive('serviceRow', [
 			};
 
 			var getColumnsWidth = function () {
-				var tHeadRow = getTHeadRow();
+				tHeadRow = getTHeadRow();
 				if (!tHeadRow) {
 					return false;
 				}
@@ -49,14 +50,6 @@ angular.module('app').directive('serviceRow', [
 			};
 
 			var updateServiceRow = function (columnsWidth) {
-
-				//  the number of columns has been changed
-				if(serviceRowColumns.length !== columnsWidth.length) {
-					serviceRow.remove();
-					createServiceRow(columnsWidth);
-					return;
-				}
-
 				for (var i = 0; i < columnsWidth.length; i++) {
 					var elt = angular.element(serviceRowColumns[i]).find('div');
 					elt.css('width', (columnsWidth[i] + 1) + 'px');
@@ -73,7 +66,16 @@ angular.module('app').directive('serviceRow', [
 					return;
 				}
 
-				if (!serviceRowColumns) {
+				// the number of columns has been changed
+				if(tHeadRow && serviceRow && serviceRowColumns.length !== columnsWidth.length) {
+					serviceRow.remove();
+					serviceRow = null;
+					if (!(columnsWidth = getColumnsWidth())) {
+						return;
+					}
+				}
+
+				if (!serviceRow) {
 					createServiceRow(columnsWidth);
 				}
 				else {
