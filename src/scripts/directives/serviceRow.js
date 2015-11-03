@@ -41,7 +41,7 @@ angular.module('app').directive('serviceRow', [
 			var createServiceRow = function (columnsWidth) {
 				var serviceRowContents = '';
 				for (var i = 0; i < columnsWidth.length; i++) {
-					serviceRowContents += '<td><div style="width:' + (columnsWidth[i] + 1) + 'px;"></div></td>';
+					serviceRowContents += '<td><div style="width:' + (columnsWidth[i] - 1) + 'px;"></div></td>';
 				}
 				var table = angular.element('<table><tr class="serviceRow">' + serviceRowContents + '</tr></table>');
 				serviceRow = table.find('tr');
@@ -52,7 +52,7 @@ angular.module('app').directive('serviceRow', [
 			var updateServiceRow = function (columnsWidth) {
 				for (var i = 0; i < columnsWidth.length; i++) {
 					var elt = angular.element(serviceRowColumns[i]).find('div');
-					elt.css('width', (columnsWidth[i] + 1) + 'px');
+					elt.css('width', (columnsWidth[i] - 1) + 'px');
 				}
 			};
 
