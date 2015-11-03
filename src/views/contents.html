@@ -9,6 +9,10 @@
 			<button class="btn btn-link" ng-click="reload()">
 				<span class="glyphicon glyphicon-refresh"></span>
 			</button>
+			<div>
+				<input type="checkbox" ng-model="showId">
+				- show/hide id column
+			</div>
 		</form>
 
 		<div class="table-grid-wrap">
@@ -20,7 +24,7 @@
 					<table class="table-grid viewport">
 						<thead>
 						<tr>
-							<th class="sort" st-sort="id">
+							<th class="sort" st-sort="id" ng-if="showId">
 								<div class="th-inn">
 									<div class="th-fixed">
 										<div class="th-inn-inn"><div><div>id</div></div></div>
@@ -65,7 +69,7 @@
 
 						<tbody service-row="columnWidthChangeEventObject">
 						<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
-							<td>
+							<td ng-if="showId">
 								<div>
 									{{row.id}}
 								</div>

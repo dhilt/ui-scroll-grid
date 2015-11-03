@@ -1,38 +1,37 @@
 angular.module('app').controller('mainController', [
-	'$scope', '$log', '$timeout', 'resourceFactory', function ($scope, console, $timeout, resource) {
-		var datasource = {};
-		var blank = true;
+	'$scope', '$log', '$timeout', 'resourceFactory',
+	function ($scope, console, $timeout, resource) {
 
-		$scope.gridFirstLoad = false;
 
-		datasource.get = function (index, count, success) {
+		// datasource implementation
 
-			var processResult = function (result) {
-				success(result);
+		$scope.datasource = {};
+		$scope.datasourceAdapter = {};
 
-				if (!$scope.gridFirstLoad || $scope.gridReload) {
-					$scope.gridFirstLoad = true;
-					$scope.gridReload = false;
-					$timeout(function () {
-						$scope.columnWidthChangeEventObject = {};
-					});
-				}
-			};
-
+		$scope.datasource.get = function (index, count, success) {
 			resource.list({
 				index: index,
 				count: count,
 				state: $scope.tableState
-			}, processResult);
+			}, function (result) {
+				success(result);
+				processFirstLoad();
+			});
 		};
 
-		$scope.datasource = datasource;
-		$scope.datasourceAdapter = {};
-		$scope.adapter = {};
-
 		$scope.reload = function () {
-			$scope.gridReload = true;
 			$scope.datasourceAdapter.reload();
+		};
+
+
+		// data manipulation
+
+		var blank = true;
+		$scope.callServer = function (tableState) {
+			$scope.tableState = tableState;
+			if (!blank && $scope.datasourceAdapter.reload)
+				$scope.datasourceAdapter.reload();
+			blank = false;
 		};
 
 		$scope.removeRow = function (row) {
@@ -53,12 +52,26 @@ angular.module('app').controller('mainController', [
 			});
 		};
 
-		$scope.callServer = function (tableState) {
-			$scope.tableState = tableState;
-			if (!blank && $scope.datasourceAdapter.reload)
-				$scope.datasourceAdapter.reload();
-			blank = false;
+
+		// DOM manipulations
+
+		$scope.showId = true;
+		$scope.gridFirstLoad = false;
+
+		var processFirstLoad = function () {
+			if (!$scope.gridFirstLoad) {
+				$scope.gridFirstLoad = true;
+				$timeout(function () {
+					$scope.columnWidthChangeEventObject = {};
+				});
+			}
 		};
+
+		$scope.$watch('showId', function () {
+			$timeout(function () {
+				$scope.columnWidthChangeEventObject = {};
+			});
+		});
 
 	}
 ]);

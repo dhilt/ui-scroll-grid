@@ -2,6 +2,7 @@ angular.module('app').directive('serviceRow', [
 	'$timeout', function ($timeout) {
 		return function (scope, element, attrs) {
 
+			var serviceRow = null;
 			var serviceRowColumns = null;
 
 			var getTHeadRow = function () {
@@ -42,13 +43,20 @@ angular.module('app').directive('serviceRow', [
 					serviceRowContents += '<td><div style="width:' + (columnsWidth[i] + 1) + 'px;"></div></td>';
 				}
 				var table = angular.element('<table><tr class="serviceRow">' + serviceRowContents + '</tr></table>');
-
+				serviceRow = table.find('tr');
 				serviceRowColumns = table.find('td');
-				injectServiceRow(table.find('tr'));
+				injectServiceRow(serviceRow);
 			};
 
 			var updateServiceRow = function (columnsWidth) {
-				// todo dhilt : thin about dealing with changes of columns number
+
+				//  the number of columns has been changed
+				if(serviceRowColumns.length !== columnsWidth.length) {
+					serviceRow.remove();
+					createServiceRow(columnsWidth);
+					return;
+				}
+
 				for (var i = 0; i < columnsWidth.length; i++) {
 					var elt = angular.element(serviceRowColumns[i]);
 					elt.css('width', (columnsWidth[i] + 1) + 'px');
