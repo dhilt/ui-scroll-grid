@@ -70,22 +70,22 @@
 						<tbody service-row="columnWidthChangeEventObject">
 						<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
 							<td ng-if="showId">
-								<div>
+								<div class="w">
 									{{row.id}}
 								</div>
 							</td>
 							<td>
-								<div>
+								<div class="w">
 									{{row.content}}
 								</div>
 							</td>
 							<td>
-								<div>
+								<div class="w">
 									<input type="checkbox" ng-model="row.selected">
 								</div>
 							</td>
 							<td>
-								<div>
+								<div class="w">
 							<span ng-click="removeRow(row)" class="remove">
 								[delete]
 							</span>
