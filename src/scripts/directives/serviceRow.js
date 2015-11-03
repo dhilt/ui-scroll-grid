@@ -3,6 +3,7 @@ angular.module('app').directive('serviceRow', [
 		return function (scope, element, attrs) {
 
 			var tHeadRow = null;
+			var columnsNumber = null;
 			var serviceRow = null;
 			var serviceRowColumns = null;
 
@@ -16,18 +17,12 @@ angular.module('app').directive('serviceRow', [
 				return tmp;
 			};
 
-			var getColumnsWidth = function () {
-				tHeadRow = getTHeadRow();
+			var getColumnsNumber = function () {
+				tHeadRow = tHeadRow || getTHeadRow();
 				if (!tHeadRow) {
 					return false;
 				}
-
-				var columns = [];
-				for (var i = 0; i < tHeadRow.children.length; i++) {
-					var child = tHeadRow.children[i];
-					columns.push(child.clientWidth);
-				}
-				return columns;
+				return tHeadRow.children.length;
 			};
 
 			var injectServiceRow = function (serviceRow) {
@@ -38,21 +33,24 @@ angular.module('app').directive('serviceRow', [
 				tmp.after(serviceRow);
 			};
 
-			var createServiceRow = function (columnsWidth) {
+			var createServiceRow = function () {
 				var serviceRowContents = '';
-				for (var i = 0; i < columnsWidth.length; i++) {
-					serviceRowContents += '<td><div style="width:' + (columnsWidth[i] + 1) + 'px;"></div></td>';
+				for (var i = 0; i < columnsNumber; i++) {
+					serviceRowContents += '<td><div></div></td>';
 				}
 				var table = angular.element('<table><tr class="serviceRow">' + serviceRowContents + '</tr></table>');
 				serviceRow = table.find('tr');
 				serviceRowColumns = table.find('td');
 				injectServiceRow(serviceRow);
+				for (i = 0; i < serviceRowColumns.length; i++) {
+					serviceRowColumns[i].firstChild.style.width = serviceRowColumns[i].clientWidth + 'px';
+				}
 			};
 
-			var updateServiceRow = function (columnsWidth) {
-				for (var i = 0; i < columnsWidth.length; i++) {
-					var elt = angular.element(serviceRowColumns[i]).find('div');
-					elt.css('width', (columnsWidth[i] + 1) + 'px');
+			var updateServiceRow = function () {
+				for (var i = 0; i < columnsNumber; i++) {
+					var elt = angular.element(serviceRowColumns[i]);
+					elt.find('div').css('width', serviceRowColumns[i].clientWidth + 'px');
 				}
 			};
 
@@ -61,25 +59,21 @@ angular.module('app').directive('serviceRow', [
 					return;
 				}
 
-				var columnsWidth;
-				if (!(columnsWidth = getColumnsWidth())) {
+				if (!(columnsNumber = getColumnsNumber())) {
 					return;
 				}
 
 				// the number of columns has been changed
-				if(tHeadRow && serviceRow && serviceRowColumns.length !== columnsWidth.length) {
+				if (tHeadRow && serviceRow && serviceRowColumns.length !== columnsNumber) {
 					serviceRow.remove();
 					serviceRow = null;
-					if (!(columnsWidth = getColumnsWidth())) {
-						return;
-					}
 				}
 
 				if (!serviceRow) {
-					createServiceRow(columnsWidth);
+					createServiceRow();
 				}
 				else {
-					updateServiceRow(columnsWidth);
+					updateServiceRow();
 				}
 
 			});
