@@ -58,7 +58,7 @@ angular.module('app').directive('serviceRow', [
 				}
 
 				for (var i = 0; i < columnsWidth.length; i++) {
-					var elt = angular.element(serviceRowColumns[i]);
+					var elt = angular.element(serviceRowColumns[i]).find('div');
 					elt.css('width', (columnsWidth[i] + 1) + 'px');
 				}
 			};
