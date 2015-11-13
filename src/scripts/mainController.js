@@ -3,6 +3,21 @@ angular.module('app').controller('mainController', [
 	function ($scope, console, $timeout, resource) {
 
 
+		// columns settings
+
+		$scope.columns = [
+			{ code: 'id', name: 'id', sortable: true, visible: true},
+			{ code: 'content', name: 'content', sortable: true, visible: true},
+			{ code: 'active', name: 'active', sortable: true, visible: true},
+			{ code: 'delete', name: 'delete', sortable: false, visible: true}
+		];
+
+		$scope.columnsObject = {};
+		for(var i = 0; i < $scope.columns.length; i++) {
+			$scope.columnsObject[$scope.columns[i].code] = $scope.columns[i];
+		};
+
+
 		// datasource implementation
 
 		$scope.datasource = {};
