@@ -12,7 +12,7 @@
 			<div>
 				Columns visibility:
 				<span ng-repeat="column in columns">
-					<input type="checkbox" ng-model="column.visible">
+					<input type="checkbox" ng-model="column.visible" ng-change="onColumnsChanged()">
 					{{column.name}} |
 				</span>
 			</div>

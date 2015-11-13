@@ -17,6 +17,12 @@ angular.module('app').controller('mainController', [
 			$scope.columnsObject[$scope.columns[i].code] = $scope.columns[i];
 		};
 
+		$scope.onColumnsChanged = function() {
+			$timeout(function() {
+				$scope.columnWidthChangeEventObject = {};
+			});
+		};
+
 
 		// datasource implementation
 
