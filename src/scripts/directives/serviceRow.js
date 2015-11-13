@@ -1,81 +1,108 @@
 angular.module('app').directive('serviceRow', [
-	'$timeout', function ($timeout) {
-		return function (scope, element, attrs) {
+	'$timeout', function($timeout) {
+		return function(scope, element, attrs) {
+			var clearWidths, columnsNumber, createServiceRow, getColumnsNumber, getTHeadRow, injectServiceRow, serviceRow, serviceRowColumns, tHeadRow, updateWidths;
+			tHeadRow = null;
+			columnsNumber = null;
+			serviceRow = null;
+			serviceRowColumns = null;
 
-			var tHeadRow = null;
-			var columnsNumber = null;
-			var serviceRow = null;
-			var serviceRowColumns = null;
-
-			var getTHeadRow = function () {
+			getTHeadRow = function() {
 				var tmp;
-				if (!(tmp = element.parent())) return false;
-				if (!(tmp = tmp.children()).length) return false;
-				if (!(tmp = tmp[0])) return false;
-				if (!(tmp = tmp.children).length) return false;
-				if (!(tmp = tmp[0])) return false;
+				tmp = void 0;
+				if (!(tmp = element.parent())) {
+					return;
+				}
+				if (!(tmp = tmp.children()).length) {
+					return;
+				}
+				if (!(tmp = tmp[0])) {
+					return;
+				}
+				if (!(tmp = tmp.children).length) {
+					return;
+				}
+				if (!(tmp = tmp[0])) {
+					return;
+				}
 				return tmp;
 			};
 
-			var getColumnsNumber = function () {
+			getColumnsNumber = function() {
 				tHeadRow = tHeadRow || getTHeadRow();
 				if (!tHeadRow) {
-					return false;
+					return;
 				}
 				return tHeadRow.children.length;
 			};
 
-			var injectServiceRow = function (serviceRow) {
+			injectServiceRow = function(serviceRow) {
 				var tmp;
-				if (!(tmp = element.children()).length) return false;
-				if (!(tmp = tmp[0])) return false; // need to inject after 1st empty (ui-scroll padding) row
-				if (!(tmp = angular.element(tmp))) return false;
+				tmp = void 0;
+				if (!(tmp = element.children()).length) {
+					return;
+				}
+				if (!(tmp = tmp[0])) {
+					return;
+				}
+				if (!(tmp = angular.element(tmp))) {
+					return;
+				}
 				tmp.after(serviceRow);
+				return true;
 			};
 
-			var createServiceRow = function () {
-				var serviceRowContents = '';
-				for (var i = 0; i < columnsNumber; i++) {
+			createServiceRow = function() {
+				var i, serviceRowContents, table;
+				serviceRowContents = '';
+				i = -1;
+				while (++i < columnsNumber) {
 					serviceRowContents += '<td><div></div></td>';
 				}
-				var table = angular.element('<table><tr class="serviceRow">' + serviceRowContents + '</tr></table>');
+				table = angular.element('<table><tr class="serviceRow">' + serviceRowContents + '</tr></table>');
 				serviceRow = table.find('tr');
 				serviceRowColumns = table.find('td');
 				injectServiceRow(serviceRow);
-				for (i = 0; i < serviceRowColumns.length; i++) {
-					serviceRowColumns[i].firstChild.style.width = (serviceRowColumns[i].clientWidth) + 'px';
-				}
 			};
 
-			var updateServiceRow = function () {
-				for (var i = 0; i < columnsNumber; i++) {
-					var elt = angular.element(serviceRowColumns[i]);
-					elt.find('div').css('width', (serviceRowColumns[i].clientWidth) + 'px');
+			clearWidths = function() {
+				var i, results;
+				i = -1;
+				results = [];
+				while (++i < columnsNumber) {
+					results.push(tHeadRow.children[i].children[0].style.width = '');
 				}
+				return results;
 			};
 
-			scope.$watch(attrs.serviceRow, function () {
+			updateWidths = function() {
+				var cssWidth, i, results;
+				i = -1;
+				results = [];
+				while (++i < columnsNumber) {
+					cssWidth = serviceRowColumns[i].clientWidth + 'px';
+					serviceRowColumns[i].firstChild.style.width = cssWidth;
+					results.push(tHeadRow.children[i].children[0].style.width = cssWidth);
+				}
+				return results;
+			};
+
+			scope.$watch(attrs.serviceRow, function() {
 				if (!scope[attrs.serviceRow]) {
 					return;
 				}
-
 				if (!(columnsNumber = getColumnsNumber())) {
 					return;
 				}
-
-				// the number of columns has been changed
 				if (tHeadRow && serviceRow && serviceRowColumns.length !== columnsNumber) {
+					clearWidths();
 					serviceRow.remove();
 					serviceRow = null;
 				}
-
 				if (!serviceRow) {
 					createServiceRow();
 				}
-				else {
-					updateServiceRow();
-				}
-
+				updateWidths();
 			});
 
 		};
