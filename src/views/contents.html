@@ -11,10 +11,9 @@
 			</button>
 			<div class="form-group">
 				<div class="btn-group" uib-dropdown>
-					<button id="split-button" type="button" class="btn btn-primary">Action</button>
+					<button id="split-button" type="button" class="btn btn-primary">Show/Hide columns</button>
 					<button type="button" class="btn btn-primary" uib-dropdown-toggle>
 						<span class="caret"></span>
-						<span class="sr-only">Split button!</span>
 					</button>
 					<ul class="uib-dropdown-menu" role="menu" aria-labelledby="split-button">
 						<li role="menuitem"><span><input type="checkbox"> Content</span></li>
@@ -53,10 +52,10 @@
 									ng-if="column.visible">
 								<div class="th-inn">
 									<div class="th-fixed">
-										<div class="th-inn-inn"><div><div><input type="checkbox"> {{column.name}}</div></div></div>
+										<div class="th-inn-inn"><div><div>{{column.name}}</div></div></div>
 									</div>
 								</div>
-								<div class="hide-text"><div><input type="checkbox"> {{column.name}}</div></div>
+								<div class="hide-text"><div>{{column.name}}</div></div>
 								<div class="sort-wrap"><div ng-class="{'sort': column.sortable}"></div></div>
 							</th>
 
