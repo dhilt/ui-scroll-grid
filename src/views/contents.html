@@ -25,8 +25,11 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<input type="checkbox" ng-model="showId">
-				- show/hide id column
+				Columns visibility:
+				<span ng-repeat="column in columns">
+					<input type="checkbox" ng-model="column.visible" ng-change="onColumnsChanged()">
+					{{column.name}} |
+				</span>
 			</div>
 		</form>
 
@@ -43,44 +46,18 @@
 					<table class="table-grid viewport">
 						<thead>
 						<tr>
-							<th class="sort" st-sort="id" ng-if="showId">
+							<th
+									ng-repeat="column in columns"
+									ng-class="{'sort': column.sortable}"
+									st-sort="{{column.sortable ? column.code : ''}}"
+									ng-if="column.visible">
 								<div class="th-inn">
 									<div class="th-fixed">
-										<div class="th-inn-inn"><div><div><input type="checkbox"> id</div></div></div>
+										<div class="th-inn-inn"><div><div><input type="checkbox"> {{column.name}}</div></div></div>
 									</div>
 								</div>
-								<div class="hide-text"><div><input type="checkbox"> id</div></div>
-								<div class="sort-wrap"><div class="sort"></div></div>
-							</th>
-
-							<th class="sort" st-sort="content">
-								<div class="th-inn">
-									<div class="th-fixed">
-										<div class="th-inn-inn"><div><div><input type="checkbox"> content</div></div></div>
-									</div>
-								</div>
-								<div class="hide-text"><div><input type="checkbox"> content</div></div>
-								<div class="sort-wrap"><div class="sort"></div></div>
-							</th>
-
-							<th class="sort" st-sort="selected">
-								<div class="th-inn">
-									<div class="th-fixed">
-										<div class="th-inn-inn"><div><div><input type="checkbox"> active</div></div></div>
-									</div>
-								</div>
-								<div class="hide-text"><div><input type="checkbox"> active</div></div>
-								<div class="sort-wrap"><div class="sort"></div></div>
-							</th>
-
-							<th>
-								<div class="th-inn">
-									<div class="th-fixed">
-										<div class="th-inn-inn"><div><div><input type="checkbox"> delete</div></div></div>
-									</div>
-								</div>
-								<div class="hide-text"><div><input type="checkbox"> delete</div></div>
-								<div class="sort-wrap"><div class="sort"></div></div>
+								<div class="hide-text"><div><input type="checkbox"> {{column.name}}</div></div>
+								<div class="sort-wrap"><div ng-class="{'sort': column.sortable}"></div></div>
 							</th>
 
 						</tr>
@@ -88,26 +65,26 @@
 
 						<tbody service-row="columnWidthChangeEventObject">
 						<tr ui-scroll="row in datasource" adapter="datasourceAdapter">
-							<td ng-if="showId" class="col-id">
+							<td ng-if="columnsObject['id'].visible" class="col-id">
 								<div class="w">
 									{{row.id}}
 								</div>
 							</td>
-							<td class="col-content">
+							<td ng-if="columnsObject['content'].visible" class="col-content">
 								<div class="w">
 									{{row.content}}
 								</div>
 							</td>
-							<td class="col-active">
+							<td ng-if="columnsObject['active'].visible" class="col-active">
 								<div class="w">
 									<input type="checkbox" ng-model="row.selected">
 								</div>
 							</td>
-							<td class="col-delete">
+							<td ng-if="columnsObject['delete'].visible" class="col-delete">
 								<div class="w">
-							<span ng-click="removeRow(row)" class="remove">
-								[delete]
-							</span>
+									<span ng-click="removeRow(row)" class="remove">
+										[delete]
+									</span>
 								</div>
 							</td>
 

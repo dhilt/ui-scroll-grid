@@ -1,7 +1,7 @@
 var express = require("express"),
-	app = express();
+app = express();
 app.use('/', express.static('./.temp'));
-app.listen(1234);
+app.listen(12345);
 
 var dataset = [];
 
@@ -66,7 +66,6 @@ app.delete('/api', function (req, res) {
 			return;
 		}
 
-
 		for (var i = 0, len = dataset.length; i < len; i = ++i) {
 			if (dataset[i].id + '' === id + '') {
 				dataset.splice(i, 1);
@@ -77,5 +76,4 @@ app.delete('/api', function (req, res) {
 
 		res.json({ id: null, reason: 'Non-existing id' });
 	}
-)
-;
+);
