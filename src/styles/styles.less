@@ -34,7 +34,6 @@ body {
 	position: relative;
 	overflow-x: auto;
 
-
 	&:before {
 		content: "";
 		position: absolute;
@@ -158,6 +157,18 @@ body {
 									cursor: default;
 									padding-left: 5px;
 									padding-right: 5px;
+
+									> * {
+										vertical-align: middle;
+									}
+
+									input[type="checkbox"] {
+										display: inline-block;
+										position: relative;
+										top: -2px;
+									}
+
+
 
 								}
 							}
@@ -805,5 +816,52 @@ body {
 
 .w {
 	//width: 500px;
+}
+
+.btn {
+
+	/*primary*/
+	&.btn-primary,
+	&.btn-info {
+		background: @accent-color;
+		border: 1px darken(@accent-color,10%) solid;
+
+		&:hover,
+		&:active,
+		&:focus,
+		&.active {
+			background: darken(@accent-color,13%);
+			border: 1px darken(@accent-color,10%) solid;
+		}
+
+	}
+	/*!primary*/
+
+
+}
+
+.dropdown-menu {
+	z-index: 10000;
+
+	li {
+		> span {
+			display: block;
+			padding: 3px 20px;
+			clear: both;
+			font-weight: normal;
+			line-height: 1.428571429;
+			color: #333333;
+			white-space: nowrap;
+
+			&:hover,&:focus {
+				color: #ffffff;
+				text-decoration: none;
+				background-color: @accent-color;
+			}
+		}
+
+
+
+	}
 }
 

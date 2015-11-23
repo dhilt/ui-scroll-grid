@@ -3,17 +3,36 @@
 	<div st-table="datasource" st-pipe="callServer">
 
 		<form class="form-inline form-actions">
-			<div class="form-group" style="display: inline-block">
+			<div class="form-group">
 				<input class="form-control" placeholder="search for id" type="search" st-search="id"/>
 			</div>
 			<button class="btn btn-link" ng-click="reload()">
 				<span class="glyphicon glyphicon-refresh"></span>
 			</button>
-			<div>
+			<div class="form-group">
+				<div class="btn-group" uib-dropdown>
+					<button id="split-button" type="button" class="btn btn-primary">Action</button>
+					<button type="button" class="btn btn-primary" uib-dropdown-toggle>
+						<span class="caret"></span>
+						<span class="sr-only">Split button!</span>
+					</button>
+					<ul class="uib-dropdown-menu" role="menu" aria-labelledby="split-button">
+						<li role="menuitem"><span><input type="checkbox"> Content</span></li>
+						<li role="menuitem"><span><input type="checkbox"> Id</span></li>
+						<li role="menuitem"><span><input type="checkbox"> Active</span></li>
+						<li role="menuitem"><span><input type="checkbox"> Delete</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-group">
 				<input type="checkbox" ng-model="showId">
 				- show/hide id column
 			</div>
 		</form>
+
+
+
+
 
 		<div class="table-grid-wrap">
 
@@ -27,40 +46,40 @@
 							<th class="sort" st-sort="id" ng-if="showId">
 								<div class="th-inn">
 									<div class="th-fixed">
-										<div class="th-inn-inn"><div><div>id</div></div></div>
+										<div class="th-inn-inn"><div><div><input type="checkbox"> id</div></div></div>
 									</div>
 								</div>
-								<div class="hide-text"><div>id</div></div>
+								<div class="hide-text"><div><input type="checkbox"> id</div></div>
 								<div class="sort-wrap"><div class="sort"></div></div>
 							</th>
 
 							<th class="sort" st-sort="content">
 								<div class="th-inn">
 									<div class="th-fixed">
-										<div class="th-inn-inn"><div><div>content</div></div></div>
+										<div class="th-inn-inn"><div><div><input type="checkbox"> content</div></div></div>
 									</div>
 								</div>
-								<div class="hide-text"><div>content</div></div>
+								<div class="hide-text"><div><input type="checkbox"> content</div></div>
 								<div class="sort-wrap"><div class="sort"></div></div>
 							</th>
 
 							<th class="sort" st-sort="selected">
 								<div class="th-inn">
 									<div class="th-fixed">
-										<div class="th-inn-inn"><div><div>active</div></div></div>
+										<div class="th-inn-inn"><div><div><input type="checkbox"> active</div></div></div>
 									</div>
 								</div>
-								<div class="hide-text"><div>active</div></div>
+								<div class="hide-text"><div><input type="checkbox"> active</div></div>
 								<div class="sort-wrap"><div class="sort"></div></div>
 							</th>
 
 							<th>
 								<div class="th-inn">
 									<div class="th-fixed">
-										<div class="th-inn-inn"><div><div>delete</div></div></div>
+										<div class="th-inn-inn"><div><div><input type="checkbox"> delete</div></div></div>
 									</div>
 								</div>
-								<div class="hide-text"><div>delete</div></div>
+								<div class="hide-text"><div><input type="checkbox"> delete</div></div>
 								<div class="sort-wrap"><div class="sort"></div></div>
 							</th>
 
