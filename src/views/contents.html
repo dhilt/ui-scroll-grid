@@ -2,6 +2,7 @@
 
 	<div st-table="datasource" st-pipe="callServer">
 
+
 		<form class="form-inline form-actions">
 			<div class="form-group">
 				<input class="form-control" placeholder="search for id" type="search" st-search="id"/>
@@ -11,29 +12,21 @@
 			</button>
 			<div class="form-group">
 				<div class="btn-group" uib-dropdown>
-					<button id="split-button" type="button" class="btn btn-primary">Show/Hide columns</button>
+					<button id="split-button" type="button" class="btn btn-primary">Columns visibility</button>
 					<button type="button" class="btn btn-primary" uib-dropdown-toggle>
 						<span class="caret"></span>
 					</button>
 					<ul class="uib-dropdown-menu" role="menu" aria-labelledby="split-button">
-						<li role="menuitem"><span><input type="checkbox"> Content</span></li>
-						<li role="menuitem"><span><input type="checkbox"> Id</span></li>
-						<li role="menuitem"><span><input type="checkbox"> Active</span></li>
-						<li role="menuitem"><span><input type="checkbox"> Delete</span></li>
+						<li role="menuitem" ng-repeat="column in columns">
+							<span>
+								<input type="checkbox" ng-model="column.visible" ng-change="onColumnsChanged()">
+								{{column.name}}
+							</span>
+						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="form-group">
-				Columns visibility:
-				<span ng-repeat="column in columns">
-					<input type="checkbox" ng-model="column.visible" ng-change="onColumnsChanged()">
-					{{column.name}} |
-				</span>
-			</div>
 		</form>
-
-
-
 
 
 		<div class="table-grid-wrap">
