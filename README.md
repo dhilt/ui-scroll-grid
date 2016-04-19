@@ -4,7 +4,7 @@ Here we have [smart-table](https://github.com/lorenzofox3/Smart-Table) grid over
 
 Prerequisites:
 * install [Git](http://git-scm.com/)
-* install [node.js (v0.10)](http://nodejs.org/) with npm (Node Package Manager)
+* install [node.js](http://nodejs.org/) with npm (Node Package Manager)
 * install [Grunt](https://github.com/gruntjs/grunt) package globally.  `npm install -g grunt-cli`
 * install [Bower] (https://github.com/bower/bower) ` npm install -g bower `
 
